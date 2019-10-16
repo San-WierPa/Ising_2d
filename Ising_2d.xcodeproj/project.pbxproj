@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9ECBC40923579FF400183877 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ECBC40823579FF400183877 /* main.c */; };
+		9ECBC4112357A06A00183877 /* ising.c in Sources */ = {isa = PBXBuildFile; fileRef = 9ECBC4102357A06A00183877 /* ising.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		9ECBC40523579FF400183877 /* Ising_2d */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Ising_2d; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ECBC40823579FF400183877 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		9ECBC40F2357A06A00183877 /* ising.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ising.h; sourceTree = "<group>"; };
+		9ECBC4102357A06A00183877 /* ising.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ising.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				9ECBC40823579FF400183877 /* main.c */,
+				9ECBC40F2357A06A00183877 /* ising.h */,
+				9ECBC4102357A06A00183877 /* ising.c */,
 			);
 			path = Ising_2d;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ECBC4112357A06A00183877 /* ising.c in Sources */,
 				9ECBC40923579FF400183877 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +247,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDUVZ9YWBG;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/gsl/2.6/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/gsl/2.6/lib;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lgsl",
+					"-lgslcblas",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -250,6 +263,13 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YDUVZ9YWBG;
+				HEADER_SEARCH_PATHS = /usr/local/Cellar/gsl/2.6/include;
+				LIBRARY_SEARCH_PATHS = /usr/local/Cellar/gsl/2.6/lib;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lgsl",
+					"-lgslcblas",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
