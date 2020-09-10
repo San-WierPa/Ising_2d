@@ -7,7 +7,7 @@ class Ising():
         Metropolis algorithm such that detailed
         balance condition is satisified'''
         for i in range(N):
-            for j in range(N):            
+            for j in range(N):
                     a = np.random.randint(0, N)
                     b = np.random.randint(0, N)
                     spinlattice =  config[a, b] #initvalue of spinLattice
