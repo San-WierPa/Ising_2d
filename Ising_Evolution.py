@@ -126,22 +126,32 @@ class Ising():
                     spin[j, k] = -1.0
         return spin
     
-    def MetropolisRandom(self, spin, beta):
-        Nx = spin.shape[0]
-        Ny = spin.shape[1]
-        acc=0
-        z_rand = np.random.randint(0,Nx,Nx)
-        s_rand = np.random.randint(0,Ny,Ny)
-        for j in z_rand:
-            j_plu = (j + 1) % Nx
-            j_min = (j - 1) % Nx
-            for k in s_rand:
-                NNSumm = (spin[j, (k + 1) % Ny] + spin[j_plu, k] + spin[j_min, k] + spin[j, (k - 1) % Ny])
-                D_H = 2 * (spin[j, k] * NNSumm)
-                if np.random.random() < np.exp(-D_H * J_tilde+4*spin[j,k]*h_tilde): #second term for the case that there is a magnetic field
-                    spin[j, k] = -spin[j, k]
-                    acc = acc + 1
-        return spin,acc/(Nx*Ny)
+    def mcMetroRandom(spinconfig,n , beta):
+    ''' This is to execute the monte carlo moves using 
+        Metropolis algorithm such that detailed
+        balance condition is satisified'''
+    for i in range(n):
+        for j in range(n):
+            a=np.random.randint(0,n) # looping over i & j therefore use a & b
+            b=np.random.randint(0,n)
+            spinlattice=spinconfig[a,b]   # is initvalue of spinLattice
+            
+            # Periodic Boundary Condition
+            neighbours=spinconfig[(a+1)%n, b] + spinconfig[a, (b+1)%n] + spinconfig[(a-1)%n, b] + spinconfig[a, (b-1)%n]
+            
+            # change in energy:
+            Delta_E=2*spinlattice*neighbours
+            
+            # using acceptance test:
+            if Delta_E<0:
+                spinlattice=-1*spinlattice
+            elif np.random.random()< np.exp(-Delta_E*beta):
+                spinlattice=-1*spinlattice
+            
+            # anyway: satisfing the detailed balance condition, 
+            # ensuring a final equilibrium state. And new config is:
+            spinconfig[a,b]=spinlattice
+    return spinconfig
     
     
     def configPlot(self, f, spin, i, n, n_):
@@ -168,7 +178,7 @@ class Ising():
             
             self.Swendsenwang(spin, 0.5)
             #self.HeatbathRandom(spin, 0.5)
-            #self.MetropolisRandom(spin, 1.0/2.0)
+            #self.mcMetroRandom(spin, 1.0/2.0)
             if i == 1:       self.configPlot(f, spin, i, N, 2);
             if i == 4:       self.configPlot(f, spin, i, N, 3);
             if i == 8:      self.configPlot(f, spin, i, N, 4);
