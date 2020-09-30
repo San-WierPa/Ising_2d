@@ -126,7 +126,7 @@ class Ising():
                     spin[j, k] = -1.0
         return spin
     
-    def mcMetroRandom(spinconfig,n , beta):
+    def mcMetroRandom(self, spinconfig,n , beta):
     ''' This is to execute the monte carlo moves using 
         Metropolis algorithm such that detailed
         balance condition is satisified'''
