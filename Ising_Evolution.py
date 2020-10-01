@@ -198,3 +198,20 @@ class Ising():
 ####output (depending from the algorithm)
 sim = Ising()
 sim.simulate()
+
+
+
+####output for spins vs MC-Steps
+temperatures = [0.5, 2.27, 5.0]
+fig = plt.figure(figsize=(18,10) )
+for T in temperatures:
+
+    spins = Ising()
+    spins = np.array(spins) / 20. ** 2
+    plt.plot(range(len(spins)), spins, label = 'T = {0}'.format(T))
+plt.legend(loc = 'best',  fontsize = 15)
+plt.xlabel(r'MC-Steps', fontsize = 20)
+plt.ylabel(r'$\langle s \rangle $',  fontsize = 20)
+plt.ylim(-1.2, 1.2)
+#plt.savefig('averageSpin_nsteps=150000.png')
+plt.show()
