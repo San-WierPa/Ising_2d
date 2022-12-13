@@ -2,7 +2,6 @@ import numpy as np
 from collections import deque
 from numba import jit
 
-### Methods defined by Mr. Marc Petry
 def Flipflop(spin,J_tilde,h_tilde):
     Nx=spin.shape[0]
     Ny=spin.shape[1]
